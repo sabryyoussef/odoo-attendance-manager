@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+venv/
+ENV/
+
+# Environment variables
+.env
+
+# Streamlit
+.streamlit/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Excel temp files
+~.xls*
+
+# OS
+.DS_Store
+Thumbs.db

@@ -10,13 +10,6 @@ import time
 import base64
 import io
 
-# Set page config
-st.set_page_config(
-    page_title="Monitoring Dashboard",
-    page_icon="📊",
-    layout="wide"
-)
-
 # Custom CSS
 st.markdown("""
     <style>
@@ -232,7 +225,7 @@ def main():
         if auto_refresh:
             if (datetime.now() - st.session_state.last_refresh).total_seconds() > refresh_interval:
                 st.session_state.last_refresh = datetime.now()
-                st.experimental_rerun()
+                st.rerun()
             
             # Show countdown
             time_to_refresh = refresh_interval - (datetime.now() - st.session_state.last_refresh).total_seconds()

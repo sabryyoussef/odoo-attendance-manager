@@ -1,25 +1,23 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
 # Python
 __pycache__/
 *.py[cod]
 *.class
 *.so
 .Python
-venv/
-ENV/
 
 # Environment variables
 .env
-
-# Streamlit
-.streamlit/
+.streamlit/secrets.toml
 
 # IDE
 .idea/
 .vscode/
 *.swp
-
-# Excel temp files
-~.xls*
 
 # OS
 .DS_Store

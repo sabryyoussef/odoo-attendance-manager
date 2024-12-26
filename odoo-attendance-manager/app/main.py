@@ -1,6 +1,6 @@
 import streamlit as st
 from . import dashboard
-from .utils.odoo_api import OdooAPI
+from .utils.odoo_api import OdooAPI, get_config
 from .utils.data_processor import process_excel_file, visualize_attendance
 from dotenv import load_dotenv
 import os
@@ -55,43 +55,42 @@ def create_missing_employees(odoo, missing_employees):
                     st.write("Affected Badge IDs:", ", ".join(map(str, employees)))
 
 def run_app():
-    # Load environment variables from .env
-    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+    # Load environment variables if running locally
+    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env')
     load_dotenv(env_path)
 
     st.title("My Odoo Attendance Manager")
     
-    # Add login section with pre-filled values from .env
     with st.sidebar:
         st.title("Settings")
         
         st.subheader("Odoo Connection")
         with st.expander("Connection Details", expanded=True):
-            st.info("These settings are pre-filled from your .env file. Edit only if needed.")
+            st.info("These settings are pre-filled from your configuration. Edit only if needed.")
             url = st.text_input(
                 "Odoo URL", 
-                value=os.getenv('ODOO_URL', ''),
-                help="The URL of your Odoo instance (e.g., https://your-company.odoo.com)"
+                value=get_config("ODOO_URL"),
+                help="The URL of your Odoo instance"
             )
             db = st.text_input(
                 "Database", 
-                value=os.getenv('ODOO_DB', ''),
+                value=get_config("ODOO_DB"),
                 help="Your Odoo database name"
             )
             username = st.text_input(
                 "Username", 
-                value=os.getenv('ODOO_USERNAME', ''),
+                value=get_config("ODOO_USERNAME"),
                 help="Your Odoo login email"
             )
             password = st.text_input(
                 "Password", 
-                value=os.getenv('ODOO_PASSWORD', ''),
+                value=get_config("ODOO_PASSWORD"),
                 type="password",
                 help="Your Odoo password"
             )
             api_key = st.text_input(
                 "API Key", 
-                value=os.getenv('api_key', ''),
+                value=get_config("api_key"),
                 type="password",
                 help="Your Odoo API key for authentication"
             )

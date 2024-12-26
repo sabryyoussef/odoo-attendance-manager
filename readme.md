@@ -49,3 +49,22 @@ streamlit run run.py
 ```
 
 The app will open in your default web browser.
+1-simple python script to run the app
+# Clone repository
+git clone https://github.com/yourusername/odoo-attendance-manager.git
+cd odoo-attendance-manager
+
+# Run deploy script
+# On Linux/Mac:
+chmod +x deploy.sh
+./deploy.sh
+
+# On Windows:
+deploy.bat
+2-docker install
+# Clone repository
+git clone https://github.com/yourusername/odoo-attendance-manager.git
+cd odoo-attendance-manager
+
+# Build and run with Docker Compose
+docker-compose up --build

@@ -1,14 +1,26 @@
 import os
 import requests
 from dotenv import load_dotenv
+import streamlit as st
+
+def get_config(key, default=""):
+    """Get configuration from either Streamlit secrets or environment variables"""
+    try:
+        return st.secrets.get(key, os.getenv(key, default))
+    except:
+        return os.getenv(key, default)
 
 class OdooAPI:
     def __init__(self):
-        self.url = os.getenv('ODOO_URL')
-        self.db = os.getenv('ODOO_DB')
-        self.username = os.getenv('ODOO_USERNAME')
-        self.password = os.getenv('ODOO_PASSWORD')
-        self.api_key = os.getenv('api_key')
+        # Load environment variables if running locally
+        env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env')
+        load_dotenv(env_path)
+        
+        self.url = get_config("ODOO_URL")
+        self.db = get_config("ODOO_DB")
+        self.username = get_config("ODOO_USERNAME")
+        self.password = get_config("ODOO_PASSWORD")
+        self.api_key = get_config("api_key")
         self.session = requests.Session()
         self.uid = None
         self.login()
